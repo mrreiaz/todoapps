@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:todoapps/screens/home_page.dart';
 
-import 'screens/home_page.dart';
-
-void main() {
-  runApp(const MyApp());
+void main() async {
+  // init flutter
+  await Hive.initFlutter();
+  // open a box.
+  await Hive.openBox('taskBox');
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -11,6 +15,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HomePage();
+    // return HomePage();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
+      theme: ThemeData(primarySwatch: Colors.yellow),
+    );
   }
 }
