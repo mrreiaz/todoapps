@@ -20,6 +20,7 @@ class _HomePageState extends State<HomePage> {
   ToDoDatabase db = ToDoDatabase();
   // text controller
   final _controller = TextEditingController();
+  var _editController = TextEditingController(text: "s");
 
   @override
   void initState() {
@@ -57,11 +58,45 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void editTask(int index) {
+    // Create a TextEditingController for editing the task.
+    _editController = TextEditingController(
+      text: db.todoList[index][0],
+    );
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DialogBox(
+          inputController: _editController,
+          onSave: () => updateTask(index),
+          onCcancle: () => Navigator.of(context).pop(),
+        );
+      },
+    );
+  }
+
   void saveNewTask() {
     setState(() {
       db.todoList.insert(0, [_controller.text, false]);
       //db.todoList.add([_controller.text, false]);
       _controller.clear();
+    });
+    db.updateData();
+    Navigator.of(context).pop();
+  }
+
+  void updateTask(index) {
+    var editData = db.todoList.elementAt(index);
+    db.todoList.removeAt(index);
+
+    setState(() {
+      if (editData[1] == false) {
+        db.todoList.insert(index, [_editController.text, false]);
+      } else {
+        db.todoList.insert(index, [_editController.text, true]);
+      }
+      //db.todoList.removeAt(index);
     });
     db.updateData();
     Navigator.of(context).pop();
@@ -83,7 +118,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.yellow[200],
       appBar: AppBar(
         elevation: 0,
-        title: Text('ToDo'),
+        title: Center(child: Text('ToDo')),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: createNewTask,
@@ -104,6 +139,7 @@ class _HomePageState extends State<HomePage> {
                   taskName: reversedTodoList[index][0],
                   taskCompletd: reversedTodoList[index][1],
                   onChange: (value) => checkBoxIsClicked(value, index),
+                  editTask: (value) => editTask(index),
                   deleteTask: (value) => deletTask(index),
                 );
               },

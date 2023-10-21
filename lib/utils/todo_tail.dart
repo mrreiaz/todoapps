@@ -8,6 +8,7 @@ class ToDoTail extends StatefulWidget {
   final bool taskCompletd;
 
   Function(bool?)? onChange;
+  Function(BuildContext)? editTask;
   Function(BuildContext)? deleteTask;
 
   ToDoTail({
@@ -15,6 +16,7 @@ class ToDoTail extends StatefulWidget {
     required this.taskName,
     required this.onChange,
     required this.taskCompletd,
+    required this.editTask,
     required this.deleteTask,
   });
 
@@ -30,6 +32,12 @@ class _ToDoTailState extends State<ToDoTail> {
         endActionPane: ActionPane(
           motion: StretchMotion(),
           children: [
+            SlidableAction(
+              onPressed: widget.editTask,
+              icon: Icons.edit,
+              backgroundColor: Colors.greenAccent,
+              borderRadius: BorderRadius.circular(10.0),
+            ),
             SlidableAction(
               onPressed: widget.deleteTask,
               icon: Icons.delete,
