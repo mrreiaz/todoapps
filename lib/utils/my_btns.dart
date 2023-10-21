@@ -13,7 +13,8 @@ class MyBtns extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       onPressed: onPressed,
-      color: text == 'Save' ? Theme.of(context).primaryColor : Colors.red,
+      //color: text == 'Save' ? Theme.of(context).primaryColor : Colors.red,
+      color: Colors.white,
       child: Text(text),
     );
   }

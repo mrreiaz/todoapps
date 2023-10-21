@@ -49,7 +49,7 @@ class _ToDoTailState extends State<ToDoTail> {
         child: Container(
           padding: EdgeInsets.all(20.0),
           decoration: BoxDecoration(
-            color: Colors.yellow[400],
+            color: Colors.white,
             borderRadius: BorderRadius.circular(10.0),
           ),
           child: Row(

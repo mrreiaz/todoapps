@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   ToDoDatabase db = ToDoDatabase();
   // text controller
   final _controller = TextEditingController();
-  var _editController = TextEditingController(text: "s");
+  var _editController = TextEditingController(text: "");
 
   @override
   void initState() {
@@ -36,9 +36,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   void checkBoxIsClicked(bool? value, int index) {
-    //print(value);
-    print(index);
-
     setState(() {
       db.todoList[index][1] = !db.todoList[index][1];
     });
@@ -79,7 +76,6 @@ class _HomePageState extends State<HomePage> {
   void saveNewTask() {
     setState(() {
       db.todoList.insert(0, [_controller.text, false]);
-      //db.todoList.add([_controller.text, false]);
       _controller.clear();
     });
     db.updateData();
@@ -111,13 +107,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget build(BuildContext context) {
-    //final reversedTodoList = List.from(db.todoList.reversed);
     final reversedTodoList = db.todoList;
 
     return Scaffold(
-      backgroundColor: Colors.yellow[200],
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
-        elevation: 0,
+        elevation: 1,
         title: Center(child: Text('ToDo')),
       ),
       floatingActionButton: FloatingActionButton(
@@ -125,26 +120,18 @@ class _HomePageState extends State<HomePage> {
         child: Icon(Icons.add),
       ),
       body: SafeArea(
-        child: Align(
-          alignment: Alignment.topCenter,
-          child: Container(
-            //alignment: Alignment.bottomRight,
-            height: 700,
-            child: ListView.builder(
-              itemCount: db.todoList.length,
-              //reverse: true,
-              itemBuilder: (context, index) {
-                //print(reversedTodoList[index]);
-                return ToDoTail(
-                  taskName: reversedTodoList[index][0],
-                  taskCompletd: reversedTodoList[index][1],
-                  onChange: (value) => checkBoxIsClicked(value, index),
-                  editTask: (value) => editTask(index),
-                  deleteTask: (value) => deletTask(index),
-                );
-              },
-            ),
-          ),
+        child: ListView.builder(
+          itemCount: db.todoList.length,
+          //reverse: true,
+          itemBuilder: (context, index) {
+            return ToDoTail(
+              taskName: reversedTodoList[index][0],
+              taskCompletd: reversedTodoList[index][1],
+              onChange: (value) => checkBoxIsClicked(value, index),
+              editTask: (value) => editTask(index),
+              deleteTask: (value) => deletTask(index),
+            );
+          },
         ),
       ),
     );

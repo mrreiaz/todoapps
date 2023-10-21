@@ -16,7 +16,7 @@ class DialogBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       clipBehavior: Clip.hardEdge,
-      backgroundColor: Colors.yellow[300],
+      backgroundColor: Theme.of(context).primaryColor,
       content: Container(
         height: 120,
         width: 350,
