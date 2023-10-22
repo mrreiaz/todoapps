@@ -10,8 +10,8 @@ You can click the Preview link to take a look at your changes.
 --->
 
 <div style="display:flex">
-  <img height=170  src="https://github-readme-stats.vercel.app/api?username=MatheDev&show_icons=true&theme=dracula" />
-  <img height=170 src="https://github-readme-stats.vercel.app/api/top-langs?username=MatheDev&layout=compact&langs_count=8&card_width=320&theme=dracula" />
+  <img height=170  src="https://github-readme-stats.vercel.app/api?username=MrReiaz&show_icons=true&theme=dracula" />
+  <img height=170 src="https://github-readme-stats.vercel.app/api/top-langs?username=MrReiaz&layout=compact&langs_count=8&card_width=320&theme=dracula" />
 </div>
 
 # todoapps
